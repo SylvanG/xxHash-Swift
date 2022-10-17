@@ -1,0 +1,19 @@
+name: ci
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
+    - name: Run tests on iOS
+      run:  xcodebuild clean test -scheme xxHash-Swift -destination "platform=iOS Simulator,OS=16.0,name=iPhone 14"
