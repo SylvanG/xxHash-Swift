@@ -36,4 +36,4 @@ git -C Sources/xxHash/xxHash checkout v0.8.1
 
 
 ## License
-The library is BSD licensed, which has the same as [upstream](https://github.com/Cyan4973/xxHash/tree/dev#license).
+The library is BSD licensed, which has the same as the [upstream](https://github.com/Cyan4973/xxHash/tree/dev#license).
