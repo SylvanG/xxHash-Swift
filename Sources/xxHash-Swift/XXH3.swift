@@ -53,8 +53,8 @@ public class XXH3 {
         return XXH3_64bits_withSeed(input, input.count, seed)
     }
     
-    /// Steaming API, repeat call ``XX3State`` update method to update the state
-    static public func digest64(seed: UInt64 = 0, withState block: (XX3State) throws -> Void) throws -> UInt64 {
+    /// Steaming API, repeat call ``XXH3State`` update method to update the state
+    static public func digest64(seed: UInt64 = 0, withState block: (XXH3State) throws -> Void) throws -> UInt64 {
         guard let state = XXH3_createState() else {
             throw XXHashError.stateInitFailed
         }
@@ -66,14 +66,14 @@ public class XXH3 {
             throw XXHashError.resetStateError
         }
         
-        try block(XX3State(state))
+        try block(XXH3State(state))
         
         return XXH3_64bits_digest(state)
     }
     
     @available(iOS 13.0.0, *)
     @available(macOS 10.15.0, *)
-    static public func digest64(seed: UInt64 = 0, withState block: (XX3State) async throws -> Void) async throws -> UInt64 {
+    static public func digest64(seed: UInt64 = 0, withState block: (XXH3State) async throws -> Void) async throws -> UInt64 {
         guard let state = XXH3_createState() else {
             throw XXHashError.stateInitFailed
         }
@@ -85,14 +85,14 @@ public class XXH3 {
             throw XXHashError.resetStateError
         }
         
-        try await block(XX3State(state))
+        try await block(XXH3State(state))
         
         return XXH3_64bits_digest(state)
     }
 }
 
 
-public struct XX3State {
+public struct XXH3State {
     let state: OpaquePointer
     
     init(_ state: OpaquePointer) {
