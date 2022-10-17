@@ -19,10 +19,32 @@ import xxHash_Swift
 ```
 
 ### Generate one-shot digest
-TODO
+```Swift
+let digest = XXH3.digest64("Input String")
+
+let digest = XXH3.digest64(Data())
+```
 
 ### Generate digest by streaming
-TODO
+1. non-async
+```Swift
+let digest = try XXH3.digest64 { state in
+    for data in dataProducer {
+        try state.update(data)
+    }
+}
+return String(digest, radix: 16, uppercase: true)
+```
+
+2. async
+```Swift
+let digest = try await XXH3.digest64 { state in
+    for try await data in dataProducer {
+        try state.update(data)
+    }
+}
+return String(digest, radix: 16, uppercase: true)
+```
 
 ## Update with upstream version
 
