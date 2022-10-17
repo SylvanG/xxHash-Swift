@@ -13,7 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: true
+    - name: Package update
+      run: swift package update
     - name: Build
       run: swift build -v
     - name: Run tests on iOS
-      run:  xcodebuild clean test -scheme xxHash-Swift -destination "platform=iOS Simulator,OS=16.0,name=iPhone 14"
+      run:  xcodebuild clean test -scheme xxHash-Swift -destination "platform=iOS Simulator,OS=15.2,name=iPhone 13"
+    - name: Run tests on macOS
+      run:  xcodebuild clean test -scheme xxHash-Swift -destination "platform=macOS"
