@@ -72,6 +72,7 @@ public class XXH3 {
     }
     
     @available(iOS 13.0.0, *)
+    @available(macOS 10.15.0, *)
     static public func digest64(seed: UInt64 = 0, withState block: (XX3State) async throws -> Void) async throws -> UInt64 {
         guard let state = XXH3_createState() else {
             throw XXHashError.stateInitFailed

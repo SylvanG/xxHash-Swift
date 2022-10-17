@@ -1,9 +1,10 @@
 # xxHash-Swift
 
-[xxHash](https://cyan4973.github.io/xxHash/) framework in Swift.
-Currently only suppport XXH3-64.
+[xxHash](https://cyan4973.github.io/xxHash/) framework in Swift. Original xxHash algorithm created by Yann Collet.
 
-Original xxHash algorithm created by Yann Collet.
+Currently only suppport XXH3-64. 
+
+It currently points to the upstream [v0.8.1](https://github.com/Cyan4973/xxHash/blob/v0.8.1/CHANGELOG)
 
 
 ## Requirements
@@ -25,9 +26,9 @@ TODO
 
 ## Update with upstream version
 
-1. Checkout upstream code with a new version, e.g. v0.8.1
+1. Checkout upstream code with a new version, e.g. v0.8.2
 ```bash
-git -C Sources/xxHash/xxHash checkout v0.8.1
+git -C Sources/xxHash/xxHash checkout v0.8.2
 ```
 
 2. Update Sources and Tests if needed
