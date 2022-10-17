@@ -67,6 +67,27 @@ final class xxHash_SwiftTests: XCTestCase {
             try state.update(input)
         }
         XCTAssertEqual(digest, expectResult)
+        
+        
+        // random ingestion
+        let input = [UInt8](input)
+        var digestedCount = 0
+        let digest2 = try! XXH3.digest64(seed: seed) { state in
+            while digestedCount < input.count {
+                let chunkSize = (0...(input.count - digestedCount)).randomElement()!
+                try state.update(input[digestedCount..<digestedCount+chunkSize])
+                digestedCount += chunkSize
+            }
+        }
+        XCTAssertEqual(digest2, expectResult)
+        
+        // byte by byte ingestion
+        let digest3 = try! XXH3.digest64(seed: seed) { state in
+            for byte in input {
+                try state.update([byte])
+            }
+        }
+        XCTAssertEqual(digest3, expectResult)
     }
     
     func testXXH3_string_sanityCheck() {
