@@ -70,6 +70,24 @@ public class XXH3 {
         
         return XXH3_64bits_digest(state)
     }
+    
+    @available(iOS 13.0.0, *)
+    static public func digest64(seed: UInt64 = 0, withState block: (XX3State) async throws -> Void) async throws -> UInt64 {
+        guard let state = XXH3_createState() else {
+            throw XXHashError.stateInitFailed
+        }
+        defer {
+            XXH3_freeState(state)
+        }
+        
+        guard XXH3_64bits_reset_withSeed(state, seed) == XXH_OK else {
+            throw XXHashError.resetStateError
+        }
+        
+        try await block(XX3State(state))
+        
+        return XXH3_64bits_digest(state)
+    }
 }
 
 
