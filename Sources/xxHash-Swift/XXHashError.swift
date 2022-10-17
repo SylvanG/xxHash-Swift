@@ -8,7 +8,7 @@
 import Foundation
 import xxHash
 
-enum XXHashError: Error {
+public enum XXHashError: Error {
     case stateInitFailed
     case resetStateError
     case updateStateError
