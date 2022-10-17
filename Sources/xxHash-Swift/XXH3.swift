@@ -99,17 +99,17 @@ public struct XX3State {
         self.state = state
     }
     
-    func update(_ input: [UInt8]) throws {
+    public func update(_ input: [UInt8]) throws {
         guard XXH3_64bits_update(state, input, input.count) == XXH_OK else {
             throw XXHashError.updateStateError
         }
     }
     
-    func update<S: Sequence>(_ s: S) throws where S.Element == UInt8 {
+    public func update<S: Sequence>(_ s: S) throws where S.Element == UInt8 {
         return try update([UInt8](s))
     }
     
-    func update(_ string: String) throws {
+    public func update(_ string: String) throws {
         try string.withCString { pointer in
             guard XXH3_64bits_update(state, pointer, string.utf8.count) == XXH_OK else {
                 throw XXHashError.updateStateError
@@ -117,7 +117,7 @@ public struct XX3State {
         }
     }
     
-    func update(_ data: Data) throws {
+    public func update(_ data: Data) throws {
         guard data.count > 0 else {
             return try update([UInt8]())
         }
