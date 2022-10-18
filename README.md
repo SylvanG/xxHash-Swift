@@ -70,5 +70,13 @@ swift package tools-version --set 5.5
 2. Update `README` with Swift requirements
 3. Run test
 
+
+### Add more test according to upstream test data
+[Test data reference](https://github.com/Cyan4973/xxHash/blob/v0.8.1/cli/xsum_sanity_check.c)
+
+### Add more hash algorithm supported in the upstream
+[Reference file](https://github.com/Cyan4973/xxHash/blob/v0.8.1/xxhash.h)
+
+
 ## License
 The library is BSD licensed, which has the same as the [upstream](https://github.com/Cyan4973/xxHash/tree/dev#license).
