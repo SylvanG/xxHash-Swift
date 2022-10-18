@@ -11,7 +11,16 @@ import PackageDescription
 //xxHashSources.append("./xxHash/xxh_x86dispatch.c")
 //#endif
 
-// Another solution is to use target dependency, but target dependency only support platform and doesn't support arch.
+// Note:
+// 1. The arch(arm) platform condition doesn’t return true for ARM 64 devices. The arch(i386) platform condition returns true when code is compiled for the 32–bit iOS simulator.
+// https://docs.swift.org/swift-book/ReferenceManual/Statements.html#ID538
+// 2. Note that compiler directives in the Package.swift will only work for checks on the 'host' machine. This is the machine building the code rather than the one running it - known as the 'target'.
+// https://www.polpiella.dev/platform-specific-code-in-swift-packages/
+// 3. Preprocessors directives like #if os(macOS) work, but they are referencing the development machine and not the target platform.
+// https://stackoverflow.com/questions/57651273/preprocessor-directives-not-working-in-package-swift
+
+
+// Another solution is to use target dependency condition, but target dependency condition only support platform and doesn't support arch.
 
     
 let package = Package(
