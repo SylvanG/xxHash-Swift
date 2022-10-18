@@ -10,8 +10,7 @@
 
 #include "../xxHash/xxhash.h"
 
-/* see https://github.com/Cyan4973/xxHash/blob/v0.8.1/xxh_x86dispatch.c */
-#if defined(__x86_64__) || defined(__i386__) || defined(_M_IX86) || defined(_M_X64)
+#ifdef XXH_X86DISPATCH_USE
 #  include "../xxHash/xxh_x86dispatch.h"
 #endif
 

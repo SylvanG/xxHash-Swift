@@ -4,17 +4,17 @@
 import PackageDescription
 
 
-var xxHashExclude = [
-    "./xxHash/tests",
-    "./xxHash/cli",
+var xxHashSources = [
+    "./xxHash/xxhash.c",
 ]
 
-#if !(arch(x86_64) || arch(i386))
-xxHashExclude.append("./xxHash/xxh_x86dispatch.c")
-xxHashExclude.append("./xxHash/xxh_x86dispatch.h")
+
+#if XXH_X86DISPATCH_USE
+print("use XXH_X86DISPATCH")
+    xxHashSources.append("./xxHash/xxh_x86dispatch.c")
 #endif
 
-
+    
 let package = Package(
     name: "xxHash-Swift",
     products: [
@@ -32,12 +32,16 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "xxHash",
-            exclude: xxHashExclude),
+            sources: xxHashSources),
         .target(
             name: "xxHash-Swift",
             dependencies: ["xxHash"]),
         .testTarget(
             name: "xxHash-SwiftTests",
-            dependencies: ["xxHash-Swift"]),
+            dependencies: ["xxHash-Swift"],
+            cSettings: [
+                .define("XXH_X86DISPATCH_USE", to: "1")
+            ]
+        ),
     ]
 )
