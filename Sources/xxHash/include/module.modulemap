@@ -1,5 +1,5 @@
 module xxHash {
     header "../xxHash/xxhash.h"
-    header "../xxHash/xxh_x86dispatch.h"
+    exclude header "../xxHash/xxh_x86dispatch.h"
     export *
 }

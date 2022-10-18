@@ -23,6 +23,7 @@ let package = Package(
             exclude: [
                 "./xxHash/tests",
                 "./xxHash/cli",
+                "./xxHash/xxh_x86dispatch.c",
             ]
         ),
         .target(
