@@ -62,10 +62,13 @@ git -C Sources/xxHash/xxHash checkout v0.8.2
 
 ### Update Swift Package Tools Version
 1. Update `Package.swift` manifest, according to [Setting the Swift Tools Version](https://github.com/apple/swift-package-manager/blob/main/Documentation/Usage.md#setting-the-swift-tools-version)
+
 For example, if we want to set the tools version to 5.5
+
 ```bash
 swift package tools-version --set 5.5
 ```
+
 2. Update `README` with Swift requirements
 3. Run test
 
