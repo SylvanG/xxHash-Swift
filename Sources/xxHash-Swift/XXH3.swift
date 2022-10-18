@@ -28,7 +28,16 @@ public class XXH3 {
     /// - Parameters:
     ///     - seed: Used to generate secret. If seed==0, using default secret.
     static public func digest64(_ string: String, seed: UInt64 = 0) -> UInt64 {
+        // although string can be implicitly converted to `UnsafePointer<UInt8>` parameter, but it is not documented.
+        // https://stackoverflow.com/questions/27063569/string-value-to-unsafepointeruint8-function-parameter-behavior
+        // https://stackoverflow.com/questions/44026115/string-withcstring-and-unsafemutablepointermutating-cstring-wrapped-into-a-fu
+        
+        // Find some document about the implicity conversion.
+        // From https://developer.apple.com/documentation/swift/string/utf8view
+        // Swift streamlines interoperation with C string APIs by letting you pass a String instance to a function as an Int8 or UInt8 pointer. When you call a C function using a String, Swift automatically creates a buffer of UTF-8 code units and passes a pointer to that buffer. The code units of that buffer match the code units in the string’s utf8 view.
+        
         return string.withCString { pointer in
+            // string.utf8.count should be equal to strlen(pointer)
             return XXH3_64bits_withSeed(pointer, string.utf8.count, seed)
         }
     }
