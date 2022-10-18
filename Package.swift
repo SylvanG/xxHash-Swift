@@ -3,6 +3,18 @@
 
 import PackageDescription
 
+
+var xxHashExclude = [
+    "./xxHash/tests",
+    "./xxHash/cli",
+]
+
+#if !(arch(x86_64) || arch(i386))
+xxHashExclude.append("./xxHash/xxh_x86dispatch.c")
+xxHashExclude.append("./xxHash/xxh_x86dispatch.h")
+#endif
+
+
 let package = Package(
     name: "xxHash-Swift",
     products: [
@@ -20,12 +32,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "xxHash",
-            exclude: [
-                "./xxHash/tests",
-                "./xxHash/cli",
-                "./xxHash/xxh_x86dispatch.c",
-            ]
-        ),
+            exclude: xxHashExclude),
         .target(
             name: "xxHash-Swift",
             dependencies: ["xxHash"]),
