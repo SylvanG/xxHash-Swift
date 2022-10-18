@@ -3,6 +3,17 @@
 
 import PackageDescription
 
+
+// Swift package won't correctly use compiler condition here, and it will compile xxh_x86dispatch.c file and throws error on arm64 device.
+//var xxHashSources = ["./xxHash/xxhash.c"]
+//
+//#if (arch(x86_64) || arch(i386))
+//xxHashSources.append("./xxHash/xxh_x86dispatch.c")
+//#endif
+
+// Another solution is to use target dependency, but target dependency only support platform and doesn't support arch.
+
+    
 let package = Package(
     name: "xxHash-Swift",
     products: [
@@ -20,11 +31,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "xxHash",
-            exclude: [
-                "./xxHash/tests",
-                "./xxHash/cli",
-            ]
-        ),
+            sources: ["./xxHash/xxhash.c"]),
         .target(
             name: "xxHash-Swift",
             dependencies: ["xxHash"]),
