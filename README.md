@@ -46,7 +46,9 @@ let digest = try await XXH3.digest64 { state in
 return String(digest, radix: 16, uppercase: true)
 ```
 
-## Update with upstream version
+## Contribution
+
+### Update with upstream version
 
 1. Checkout upstream code with a new version, e.g. v0.8.2
 ```bash
@@ -57,6 +59,16 @@ git -C Sources/xxHash/xxHash checkout v0.8.2
 3. Update README if needed
 4. Tag with a new version accoring to [Semantic Versioning 2.0.0](https://semver.org/)
 
+
+### Update Swift Package Tools Version
+1. Update `Package.swift` manifest, according to (Setting the Swift Tools Version
+)[https://github.com/apple/swift-package-manager/blob/main/Documentation/Usage.md#setting-the-swift-tools-version]
+For example, if we want to set the tools version to 5.5
+```bash
+swift package tools-version --set 5.5
+```
+2. Update `README` with Swift requirements
+3. Run test
 
 ## License
 The library is BSD licensed, which has the same as the [upstream](https://github.com/Cyan4973/xxHash/tree/dev#license).
